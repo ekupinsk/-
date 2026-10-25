@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מרוץ לקריירה - משחק מיומנויות רכות</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- ================= מסך פתיחה ================= -->
+        <section id="screen-start" class="screen active">
+            <div class="hero-section">
+                <div class="logo-badge">🎓 ← 💼</div>
+                <h1 class="game-title">מרוץ לקריירה</h1>
+                <p class="game-subtitle">התחרו מול חבריכם ומול ה-AI בפתרון סיטואציות מעולם העבודה, אספו מיומנויות והגיעו
+                    לעבודת החלומות שלכם!</p>
+            </div>
+
+            <div class="setup-container card">
+                <h2>הגדרת שחקנים</h2>
+                <div class="player-inputs">
+                    <div class="input-group">
+                        <label for="player1-name">שחקן 1:</label>
+                        <input type="text" id="player1-name" value="שחקן 1" placeholder="שם שחקן 1" maxlength="15">
+                    </div>
+                    <div class="input-group">
+                        <label for="player2-name">שחקן 2:</label>
+                        <input type="text" id="player2-name" value="שחקן 2" placeholder="שם שחקן 2" maxlength="15">
+                    </div>
+                    <div class="input-group">
+                        <label for="player3-name">שחקן 3:</label>
+                        <input type="text" id="player3-name" value="שחקן 3" placeholder="שם שחקן 3" maxlength="15">
+                    </div>
+                    <div class="input-group">
+                        <label for="player4-name">שחקן 4:</label>
+                        <input type="text" id="player4-name" value="שחקן 4" placeholder="שם שחקן 4" maxlength="15">
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions-container card">
+                <h2>איך משחקים? 📖</h2>
+                <div class="instructions-steps">
+                    <div class="step-item">
+                        <span class="step-badge">1</span>
+                        <p><strong>הגדירו שחקנים:</strong> הכניסו שמות לעד 4 שחקנים ולחצו על "התחל משחק".</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">2</span>
+                        <p><strong>הטילו קובייה:</strong> בתורכם, הטילו את הקובייה כדי להגריל אחת מ-6 קטגוריות מיומנות
+                            ולקבל קלף סיטואציה.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">3</span>
+                        <p><strong>כתבו תשובה:</strong> הקלידו פתרון יצירתי ומקצועי להתמודדות עם הסיטואציה שקיבלתם.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">4</span>
+                        <p><strong>הצביעו מול ה-AI:</strong> שאר השחקנים יצביעו באופן אנונימי (ללא ידיעה מי כתב מה) בין
+                            התשובה שלכם לבין תשובת ה-AI 🤖. הסיבה שאנו מתחרים מול ה-AI היא שבעולם העבודה החדש ה-AI מתחרה
+                            בנו על משרות, ועלינו להוכיח למעסיקים שהמיומנויות האנושיות והרכות שלנו שוות יותר!</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">5</span>
+                        <p><strong>זכו בקלפים והחליפו:</strong> אם תשובתכם ניצחה את ה-AI, תזכו בקלף הקטגוריה. תוכלו לבצע
+                            <strong>החלפות קלפים 🤝</strong> כדי לשתף פעולה ולהשלים זה את זה – למשל, אם שחקן אחד טוב
+                            בניהול זמן אך חלש בקבלת החלטות, ושחקן אחר טוב בקבלת החלטות אך חלש בניהול זמן, הם יכולים
+                            להחליף קלפים כדי להשלים זה את זה ולעבוד יחד כצוות מנצח!</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-badge">6</span>
+                        <p><strong>עלו בדרגה ונצחו:</strong> השלמת סט של כל 6 הקטגוריות תעלה אתכם דרגה במסלול הקריירה
+                            (מסטודנט ועד לעבודת החלומות 🏆).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-actions">
+                <button id="btn-start-game" class="btn btn-primary btn-large">התחל משחק 🚀</button>
+                <button id="btn-manage-cards" class="btn btn-secondary btn-large">ניהול קלפים 🗃️</button>
+            </div>
+        </section>
+
+        <!-- ================= מסך ניהול קלפים ================= -->
+        <section id="screen-manage" class="screen">
+            <div class="header-bar">
+                <button id="btn-manage-back" class="btn btn-icon-back">← חזרה למסך פתיחה</button>
+                <h2>ניהול קלפים וסיטואציות</h2>
+            </div>
+
+            <p class="section-desc">לחצו על אחת הקטגוריות למטה כדי לנהל את קלפי הסיטואציות שלה ולהוסיף תשובות AI.</p>
+
+            <!-- 6 קטגוריות -->
+            <div class="category-grid">
+                <button class="btn btn-category" data-category="1">
+                    <span class="cat-num">1</span>
+                    <span class="cat-name">תקשורת בין־אישית</span>
+                </button>
+                <button class="btn btn-category" data-category="2">
+                    <span class="cat-num">2</span>
+                    <span class="cat-name">אינטליגנציה רגשית</span>
+                </button>
+                <button class="btn btn-category" data-category="3">
+                    <span class="cat-num">3</span>
+                    <span class="cat-name">ניהול זמן</span>
+                </button>
+                <button class="btn btn-category" data-category="4">
+                    <span class="cat-num">4</span>
+                    <span class="cat-name">קבלת החלטות</span>
+                </button>
+                <button class="btn btn-category" data-category="5">
+                    <span class="cat-num">5</span>
+                    <span class="cat-name">חשיבה יצירתית</span>
+                </button>
+                <button class="btn btn-category" data-category="6">
+                    <span class="cat-num">6</span>
+                    <span class="cat-name">גמישות והסתגלות</span>
+                </button>
+            </div>
+
+            <!-- אזור ניהול קטגוריה ספציפית -->
+            <div id="category-editor" class="card editor-card hidden">
+                <h3 id="editor-title" class="editor-header">קטגוריה נבחרת</h3>
+
+                <div class="editor-grid">
+                    <!-- הוספת קלף חדש -->
+                    <div class="editor-section add-card-section">
+                        <h4>הוספת קלף סיטואציה חדש</h4>
+                        <div class="form-group">
+                            <label for="new-card-text">נוסח הסיטואציה / השאלה:</label>
+                            <textarea id="new-card-text" rows="3"
+                                placeholder="הקלד כאן את הסיטואציה החדשה..."></textarea>
+                        </div>
+                        <button id="btn-add-card" class="btn btn-accent">הוסף קלף לקופה ➕</button>
+                    </div>
+
+                    <!-- ניהול קלף קיים -->
+                    <div class="editor-section edit-card-section">
+                        <h4>הוספת תשובת AI לקלפים קיימים</h4>
+                        <div class="form-group">
+                            <label for="select-cards-dropdown">בחר קלף מהקטגוריה:</label>
+                            <select id="select-cards-dropdown" class="form-control">
+                                <option value="">-- בחר קלף --</option>
+                            </select>
+                        </div>
+
+                        <div id="selected-card-details" class="card-details-box hidden">
+                            <div class="card-preview">
+                                <strong>טקסט הקלף:</strong>
+                                <p id="preview-card-text" class="preview-text"></p>
+                            </div>
+
+                            <div class="ai-answers-list">
+                                <strong>תשובות AI שמורות:</strong>
+                                <ul id="preview-ai-answers">
+                                    <!-- יתמלא דינמית -->
+                                </ul>
+                            </div>
+
+                            <div class="form-group add-ai-answer-form">
+                                <label for="new-ai-answer">הוסף תשובת AI חדשה לקלף זה:</label>
+                                <textarea id="new-ai-answer" rows="2"
+                                    placeholder="כתוב כאן תשובת AI חכמה..."></textarea>
+                                <button id="btn-add-ai-answer" class="btn btn-accent-outline btn-small">הוסף תשובת AI
+                                    🤖</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= מסך המשחק ================= -->
+        <section id="screen-game" class="screen">
+            <div class="game-header">
+                <h2>מרוץ לקריירה - לוח המשחק</h2>
+                <button id="btn-quit-game" class="btn btn-outline-danger btn-small">סיום משחק ✖</button>
+            </div>
+
+            <!-- מקרא קטגוריות בראש המשחק -->
+            <div class="game-categories-legend card">
+                <span class="legend-title">מפתח קטגוריות:</span>
+                <div class="legend-items">
+                    <div class="legend-item cat-1"><span class="legend-num">1</span> תקשורת בין־אישית</div>
+                    <div class="legend-item cat-2"><span class="legend-num">2</span> אינטליגנציה רגשית</div>
+                    <div class="legend-item cat-3"><span class="legend-num">3</span> ניהול זמן</div>
+                    <div class="legend-item cat-4"><span class="legend-num">4</span> קבלת החלטות</div>
+                    <div class="legend-item cat-5"><span class="legend-num">5</span> חשיבה יצירתית</div>
+                    <div class="legend-item cat-6"><span class="legend-num">6</span> גמישות והסתגלות</div>
+                </div>
+            </div>
+
+            <!-- סולם דרגות התקדמות בראש המשחק -->
+            <div class="game-ranks-legend card">
+                <span class="legend-title">מסלול הקריירה (דרגות):</span>
+                <div class="rank-steps">
+                    <div class="rank-step"><span class="rank-step-num">1</span>סטודנט</div>
+                    <div class="rank-step-arrow">←</div>
+                    <div class="rank-step"><span class="rank-step-num">2</span>עובד זוטר</div>
+                    <div class="rank-step-arrow">←</div>
+                    <div class="rank-step"><span class="rank-step-num">3</span>עובד מנוסה</div>
+                    <div class="rank-step-arrow">←</div>
+                    <div class="rank-step"><span class="rank-step-num">4</span>ראש צוות</div>
+                    <div class="rank-step-arrow">←</div>
+                    <div class="rank-step"><span class="rank-step-num">5</span>מנהל מחלקה</div>
+                    <div class="rank-step-arrow">←</div>
+                    <div class="rank-step rank-step-final"><span class="rank-step-num">🏆</span>עבודת החלומות</div>
+                </div>
+            </div>
+
+            <div class="game-layout">
+                <!-- האזור המרכזי של שלבי המשחק -->
+                <div class="game-main-area">
+
+                    <!-- לוח מצב השחקן שבתורו -->
+                    <div class="turn-indicator-card card">
+                        <div class="turn-badge">התור של:</div>
+                        <div id="active-player-name" class="active-player-name">ישראל ישראלי</div>
+                        <div class="active-player-rank-wrapper">
+                            <span>דרגה נוכחית:</span>
+                            <strong id="active-player-rank" class="rank-badge">סטודנט</strong>
+                        </div>
+                    </div>
+
+                    <!-- אזור שלבי המשחק (נשלט דינמית על ידי JS) -->
+                    <div class="stage-container">
+
+                        <!-- שלב 1: זריקת קובייה -->
+                        <div id="stage-roll" class="game-stage active">
+                            <h3>שלב 1: זריקת הקובייה</h3>
+                            <p>לחץ על הכפתור כדי להגריל קטגוריה ולקבל קלף סיטואציה.</p>
+
+                            <div class="dice-wrapper">
+                                <div id="visual-dice" class="dice">1</div>
+                            </div>
+
+                            <button id="btn-roll-dice" class="btn btn-primary btn-large">זרוק קובייה! 🎲</button>
+                        </div>
+
+                        <!-- שלב 2: מענה על שאלה -->
+                        <div id="stage-answer" class="game-stage">
+                            <div class="category-header-badge" id="answer-cat-badge">קטגוריה: תקשורת בין־אישית</div>
+                            <div class="situation-card">
+                                <div class="card-icon">💡</div>
+                                <p id="game-situation-text">כאן תופיע הסיטואציה שעל השחקן להתמודד איתה...</p>
+                            </div>
+
+                            <div class="answer-form card">
+                                <h3>התשובה שלך</h3>
+                                <p>כתוב כיצד היית פועל בסיטואציה זו בצורה הטובה ביותר:</p>
+                                <textarea id="player-answer-input" rows="4"
+                                    placeholder="הקלד את תשובתך כאן..."></textarea>
+                                <button id="btn-submit-answer" class="btn btn-primary btn-large">שלח תשובה ✉️</button>
+                            </div>
+                        </div>
+
+                        <!-- שלב 3: הצבעה אנונימית -->
+                        <div id="stage-vote" class="game-stage">
+                            <div class="voting-intro">
+                                <h3>שלב 3: הצבעה אנונימית של שאר השחקנים</h3>
+                                <p class="alert-info">השחקן המשיב מתבקש שלא להסתכל! שאר 3 השחקנים צריכים להצביע עבור
+                                    התשובה המועדפת עליהם.</p>
+                            </div>
+
+                            <!-- השאלה / סיטואציה עבור המצביעים -->
+                            <div class="situation-card card" style="margin-bottom: 20px;">
+                                <div class="card-icon">💡</div>
+                                <div>
+                                    <strong>הסיטואציה שעליה מצביעים:</strong>
+                                    <p id="vote-situation-text"
+                                        style="margin-top: 5px; font-weight: 500; font-size: 1.1rem; line-height: 1.5;">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="options-comparison">
+                                <div class="option-box card" id="opt-a-container">
+                                    <div class="option-header">תשובה א'</div>
+                                    <p id="option-a-text">תוכן תשובה א...</p>
+                                </div>
+                                <div class="option-box card" id="opt-b-container">
+                                    <div class="option-header">תשובה ב'</div>
+                                    <p id="option-b-text">תוכן תשובה ב...</p>
+                                </div>
+                            </div>
+
+                            <div class="voters-panel card">
+                                <h4>לוח הצבעות</h4>
+                                <div id="voters-list" class="voters-list">
+                                    <!-- יתמלא בשלושה שחקנים מצביעים -->
+                                </div>
+                                <button id="btn-see-results" class="btn btn-primary btn-large hidden">ראה תוצאות
+                                    📊</button>
+                            </div>
+                        </div>
+
+                        <!-- שלב 4: תוצאות סיבוב -->
+                        <div id="stage-result" class="game-stage">
+                            <h3 id="result-status-title">תוצאות הסיבוב</h3>
+
+                            <div class="result-cards-comparison">
+                                <div class="result-block card" id="res-player-block">
+                                    <div class="result-owner-badge player-badge">התשובה שלך</div>
+                                    <p id="result-player-text"></p>
+                                    <div class="vote-result-count" id="result-player-votes">קולות: 0</div>
+                                </div>
+
+                                <div class="result-block card" id="res-ai-block">
+                                    <div class="result-owner-badge ai-badge">תשובת ה-AI 🤖</div>
+                                    <p id="result-ai-text"></p>
+                                    <div class="vote-result-count" id="result-ai-votes">קולות: 0</div>
+                                </div>
+                            </div>
+
+                            <div id="result-outcome-box" class="outcome-box">
+                                <!-- תיאור הזכייה בקלף או הפסד -->
+                            </div>
+
+                            <button id="btn-next-turn" class="btn btn-primary btn-large">המשך לתור הבא ➔</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- סרגל צדדי / לוח תוצאות (Scoreboard) -->
+                <aside class="game-sidebar">
+                    <div class="sidebar-header" style="display: flex; flex-direction: column; gap: 8px;">
+                        <span>לוח תוצאות ומצב שחקנים</span>
+                        <button id="btn-open-trade" class="btn btn-accent-outline btn-small"
+                            style="font-size: 0.85rem; width: 100%; border-radius: 6px; padding: 6px 10px;">החלפת קלפים
+                            🤝</button>
+                    </div>
+                    <div id="scoreboard-list" class="scoreboard-list">
+                        <!-- יתמלא דינמית על ידי JS עבור 4 שחקנים -->
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ================= מסך ניצחון ================= -->
+        <section id="screen-winner" class="screen">
+            <div class="winner-card card">
+                <div class="crown-icon">👑</div>
+                <h1 class="winner-title">יש לנו מנצח!</h1>
+                <h2 id="winner-name" class="winner-name">שחקן X</h2>
+                <p class="winner-desc">הצלחת להוכיח מיומנויות רכות ברמה הגבוהה ביותר והגעת לעבודת החלומות שלך!</p>
+                <div class="trophy-details">🎓 ← 💼 ← 🏆</div>
+                <button id="btn-restart-game" class="btn btn-primary btn-large">משחק חדש 🔄</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- הודעות מותאמות (Toast / Modal alerts) -->
+    <div id="toast-notification" class="toast hidden">
+        <span id="toast-message">הודעה כלשהי</span>
+    </div>
+
+    <!-- מודל חגיגי לעליית דרגה -->
+    <div id="levelup-modal" class="modal-overlay hidden">
+        <div class="modal-content card animate-pop">
+            <div class="modal-emoji">🎉</div>
+            <h2>עליית דרגה!</h2>
+            <p id="levelup-message">השחקן עלה לדרגה חדשה</p>
+            <button id="btn-close-levelup" class="btn btn-accent">מצוין, המשך במשחק!</button>
+        </div>
+    </div>
+
+    <!-- מודל החלפת קלפים -->
+    <div id="trade-modal" class="modal-overlay hidden">
+        <div class="modal-content card animate-pop" style="max-width: 500px; width: 90%;">
+            <h2>החלפת קלפים 🤝</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">בצעו החלפה הדדית של קלפי מיומנויות בהסכמת שני
+                הצדדים.</p>
+
+            <div class="trade-form" style="display: flex; flex-direction: column; gap: 15px; text-align: right;">
+                <!-- שחקן א' -->
+                <div class="trade-player-section card" style="padding: 15px; margin-bottom: 0;">
+                    <label for="trade-p1-select" style="font-weight: 700; display: block; margin-bottom: 5px;">שחקן
+                        א':</label>
+                    <select id="trade-p1-select" class="form-control"
+                        style="margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);"></select>
+
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">בחר קלף לתת:</label>
+                    <div id="trade-p1-cards" class="trade-cards-selector"
+                        style="display: flex; flex-wrap: wrap; gap: 5px;">
+                        <!-- יתמלא דינמית בכפתורי קלפים זמינים -->
+                    </div>
+                </div>
+
+                <!-- חצי החלפה -->
+                <div
+                    style="text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); margin: 5px 0;">
+                    ⇅</div>
+
+                <!-- שחקן ב' -->
+                <div class="trade-player-section card" style="padding: 15px; margin-bottom: 0;">
+                    <label for="trade-p2-select" style="font-weight: 700; display: block; margin-bottom: 5px;">שחקן
+                        ב':</label>
+                    <select id="trade-p2-select" class="form-control"
+                        style="margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);"></select>
+
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">בחר קלף לתת:</label>
+                    <div id="trade-p2-cards" class="trade-cards-selector"
+                        style="display: flex; flex-wrap: wrap; gap: 5px;">
+                        <!-- יתמלא דינמית בכפתורי קלפים זמינים -->
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 25px; width: 100%;">
+                <button id="btn-submit-trade" class="btn btn-primary" style="flex: 1;">בצע החלפה! 🤝</button>
+                <button id="btn-close-trade" class="btn btn-secondary" style="flex: 1;">ביטול ✖</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entry -->
+    <script src="script.js"></script>
+</body>
+
+</html>
